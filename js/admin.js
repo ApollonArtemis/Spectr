@@ -20,52 +20,58 @@ const auth = getAuth(app);
 let userID = 0;
 let tbody = document.getElementById('tbody1');
 
+
 function StaffManagement(company_email, company_name, company_branch, company_city) {
     let trow = document.createElement("tr");
+    
 
     let td1 = document.createElement('td');
+    td1.style.color = "white";
     let td2 = document.createElement('td');
+    td2.style.color = "white";
     let td3 = document.createElement('td');
+    td3.style.color = "white";
     let td4 = document.createElement('td');
+    td4.style.color = "white";
     let td5 = document.createElement('td');
-    let td6 = document.createElement('td');
+
+
 
     td1.classList.add('text-center');
     td2.classList.add('text-center');
     td3.classList.add('text-center');
     td4.classList.add('text-center');
     td5.classList.add('text-center');
-    td6.classList.add('text-center');
 
-    td1.innerHTML = ++userID;
-    td2.innerHTML = company_email;
-    td3.innerHTML = company_name;
-    td4.innerHTML = company_branch;
-    td5.innerHTML = company_city;
+    td1.innerHTML = company_email;
+    td2.innerHTML = company_name;
+    td3.innerHTML = company_branch;
+    td4.innerHTML = company_city;
 
     let buttonContainer = document.createElement('div');
     buttonContainer.classList.add('d-flex', 'justify-content-center', 'flex-column', 'gap-2', 'flex-sm-row');
 
+
+
     let viewBtn = document.createElement('button');
     viewBtn.type = "button";
     viewBtn.className = "btn text-sm";
-    viewBtn.style.backgroundColor = "rgb(49, 101, 147)";
-    viewBtn.style.color = "white";
-    viewBtn.innerHTML = "<img src='images/icons/view.png' alt='View'> View";
+    viewBtn.style.backgroundColor = "#181818";
+    viewBtn.style.color = "#2ff29e";
+    viewBtn.innerHTML = "View";
     viewBtn.addEventListener('click', function () {
         viewButtonClicked(company_email);
     });
 
     buttonContainer.appendChild(viewBtn);
 
-    td6.appendChild(buttonContainer);
+    td5.appendChild(buttonContainer);
 
     trow.appendChild(td1);
     trow.appendChild(td2);
     trow.appendChild(td3);
     trow.appendChild(td4);
     trow.appendChild(td5);
-    trow.appendChild(td6);
 
     tbody.appendChild(trow);
 }

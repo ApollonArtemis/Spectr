@@ -20,7 +20,6 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const auth = getAuth(app);
 
-
 // Function to validate name fields (only letters allowed)
 function isValidName(name) {
     return /^[a-zA-Z\s]+$/.test(name);
@@ -87,6 +86,11 @@ function isValidPassword(password) {
     );
 }
 
+// Function to validate PIN code (only numbers allowed, max 4 digits)
+function isValidPinCode(pin) {
+    return /^[0-9]{1,4}$/.test(pin);
+}
+
 // Function to validate the telephone number format (00-000-0000 or 000-000-0000)
 function isValidTelephoneNo(telephoneNo) {
     // Check if the number matches either 00-000-0000 or 000-000-0000
@@ -117,6 +121,7 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
 const passwordFeedback = document.getElementById('passwordFeedback');
+const pincode = document.getElementById('pincode');
 
 const companyName = document.getElementById('companyName');
 const companyBranch = document.getElementById('companyBranch');
@@ -127,7 +132,6 @@ const companyRegion = document.getElementById('companyRegion');
 const companyProvince = document.getElementById('companyProvince');
 const companyCity = document.getElementById('companyCity');
 const companyBarangay = document.getElementById('companyBarangay');
-
 
 const RegisterUser = async (evt) => {
     evt.preventDefault();
@@ -234,16 +238,16 @@ const RegisterUser = async (evt) => {
         // Check if company email already exists in Firebase Database
         const companyEmailRef = ref(db, `Registered_Accounts/`);
         const snapshot = await get(companyEmailRef);
-        let isEmailTaken = false;
+        let isCompanyEmailTaken = false;
 
         snapshot.forEach((userSnapshot) => {
             const userData = userSnapshot.val();
             if (userData.company_email === companyEmail.value) {
-                isEmailTaken = true;
+                isCompanyEmailTaken = true;
             }
         });
 
-        if (isEmailTaken) {
+        if (isCompanyEmailTaken) {
             companyEmail.classList.add('is-invalid');
             companyEmailFeedback.innerText = "Company email is already taken.";
             companyEmailFeedback.style.display = 'block';
@@ -343,6 +347,44 @@ const RegisterUser = async (evt) => {
         confirmPasswordFeedback.style.display = 'none';
     }
 
+    // Validates PIN Code Number
+    const checkPinCode = pincode.value;
+    const pincodeRef = ref(db, 'Registered_Accounts/');
+    const snapshot_pincodeRef = await get(pincodeRef);
+    let isPinCodeTaken = false;
+
+    snapshot_pincodeRef.forEach((userSnapshot) => {
+        const userData = userSnapshot.val();
+        if (userData.pincode === checkPinCode) {
+            isPinCodeTaken = true;
+        }
+    })
+
+    if (isPinCodeTaken) {
+        pincode.classList.remove('is-valid');
+        pincode.classList.add('is-invalid');
+        pincodeFeedback.innerText = "*Pin code number is already taken.";
+        pincodeFeedback.style.display = 'block';
+        return;
+    } else if (!pincode.value) {
+        pincode.classList.add('is-invalid');
+        pincodeFeedback.innerText = "*Please provide a pin code number.";
+        pincodeFeedback.style.display = 'block';
+        return; // Stop processing
+    } else if (isValidPinCode(pincode.value)) {
+        pincode.classList.remove('is-invalid');
+        pincode.classList.add('is-valid');
+        pincodeFeedback.style.display = 'none';
+    } else {
+        pincode.classList.remove('is-valid');
+        pincode.classList.add('is-invalid');
+        pincodeFeedback.innerText = "*Invalid pin code number.";
+        pincodeFeedback.style.display = 'block';
+    }
+
+    // Generate MD5 hash of the password
+    const hashedPassword = CryptoJS.MD5(password.value).toString();
+
     // Create user in Firebase Auth
     createUserWithEmailAndPassword(auth, email.value, password.value)
         .then((credentials) => {
@@ -359,7 +401,8 @@ const RegisterUser = async (evt) => {
                 barangay: barangay.value,
                 address_info: addressInfo.value,
                 email: email.value,
-                password: password.value,
+                password: hashedPassword,
+                pincode: pincode.value,
                 company_name: companyName.value,
                 company_branch: companyBranch.value,
                 company_email: companyEmail.value,
@@ -626,7 +669,6 @@ companyEmail.addEventListener('blur', async () => {
     }
 })
 
-
 // Add event listener for password input validation as user types
 password.addEventListener('input', () => {
     // Check if the password meets the criteria
@@ -655,6 +697,43 @@ confirmPassword.addEventListener('input', () => {
         confirmPassword.classList.add('is-valid');
         confirmPasswordFeedback.innerText = "";
         confirmPasswordFeedback.style.display = 'block';
+    }
+});
+
+pincode.addEventListener('blur', async () => {
+    // Validates PIN Code Number
+    const checkPinCode = pincode.value;
+    const pincodeRef = ref(db, 'Registered_Accounts/');
+    const snapshot_pincodeRef = await get(pincodeRef);
+    let isPinCodeTaken = false;
+
+    snapshot_pincodeRef.forEach((userSnapshot) => {
+        const userData = userSnapshot.val();
+        if (userData.pincode === checkPinCode) {
+            isPinCodeTaken = true;
+        }
+    })
+
+    if (isPinCodeTaken) {
+        pincode.classList.remove('is-valid');
+        pincode.classList.add('is-invalid');
+        pincodeFeedback.innerText = "*Pin code number is already taken.";
+        pincodeFeedback.style.display = 'block';
+        return;
+    } else if (!pincode.value) {
+        pincode.classList.add('is-invalid');
+        pincodeFeedback.innerText = "*Please provide a pin code number.";
+        pincodeFeedback.style.display = 'block';
+        return; // Stop processing
+    } else if (isValidPinCode(pincode.value)) {
+        pincode.classList.remove('is-invalid');
+        pincode.classList.add('is-valid');
+        pincodeFeedback.style.display = 'none';
+    } else {
+        pincode.classList.remove('is-valid');
+        pincode.classList.add('is-invalid');
+        pincodeFeedback.innerText = "*Invalid pin code number.";
+        pincodeFeedback.style.display = 'block';
     }
 });
 

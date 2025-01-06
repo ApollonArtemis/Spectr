@@ -18,9 +18,9 @@ const db = getDatabase();
 const auth = getAuth(app);
 
 let userID = 0;
-let tbody = document.getElementById('tbody2');
+let tbody = document.getElementById('tbody_cam3');
 
-function StaffManagement(staff_firstname, staff_lastname, position) {
+function CameraLogs3(date, time, camera, type) {
     let trow = document.createElement("tr");
 
     let td1 = document.createElement('td');
@@ -33,10 +33,10 @@ function StaffManagement(staff_firstname, staff_lastname, position) {
     td3.classList.add('text-center');
     td4.classList.add('text-center');
 
-    td1.innerHTML = ++userID;
-    td2.innerHTML = staff_firstname;
-    td3.innerHTML = staff_lastname;
-    td4.innerHTML = position;
+    td1.innerHTML = date;
+    td2.innerHTML = time;
+    td3.innerHTML = camera;
+    td4.innerHTML = type;
 
     trow.appendChild(td1);
     trow.appendChild(td2);
@@ -51,13 +51,19 @@ function AddAllItemsToTable(TheUser) {
     tbody.innerHTML = "";
 
     TheUser.reverse().forEach(element => {
-        StaffManagement(element.staff_firstname, element.staff_lastname, element.position);
+        CameraLogs3(element.date, element.time, element.camera, element.type);
     });
 
-    if ($.fn.DataTable.isDataTable('#example')) {
-        $('#example').DataTable().clear();
-        $('#example').DataTable().destroy();
+    // Clear existing DataTable instance if it already exists
+    if ($.fn.DataTable.isDataTable('#cameralogs3')) {
+        $('#cameralogs3').DataTable().clear();
+        $('#cameralogs3').DataTable().destroy();
     }
+
+    // Initialize DataTable without export buttons
+    $(document).ready(function () {
+        $('#cameralogs3').DataTable();
+    });
 }
 
 function GetAllDataOnce() {
@@ -65,7 +71,7 @@ function GetAllDataOnce() {
 
     if (user) {
         const uid = user.uid; // Get the UID of the logged-in user
-        const dbRef = ref(db, `Registered_Accounts/${uid}/Staff_Management`);
+        const dbRef = ref(db, `Registered_Accounts/${uid}/Detection/CAMERA 3`);
 
         onValue(dbRef, (snapshot) => {
             let users = [];

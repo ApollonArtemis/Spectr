@@ -17,6 +17,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const auth = getAuth(app);
 
+
 function isValidName(name) {
     return /^[a-zA-Z\s]+$/.test(name);
 }
@@ -28,7 +29,7 @@ function isValidContactNo(staffcontactNoInput) {
 }
 
 let userID = 0;
-let tbody = document.getElementById('tbody1');
+let tbody = document.getElementById('tbody_staff');
 
 let staffcontactNoInput = document.getElementById('editContactNo');
 let staff_FirstnameInput = document.getElementById('editFirstname');
@@ -113,13 +114,13 @@ function AddAllItemsToTable(TheUser) {
         StaffManagement(element.idnumber, element.position, element.staff_firstname, element.staff_lastname);
     });
 
-    if ($.fn.DataTable.isDataTable('#example')) {
-        $('#example').DataTable().clear();
-        $('#example').DataTable().destroy();
+    if ($.fn.DataTable.isDataTable('#table_staff')) {
+        $('#table_staff').DataTable().clear();
+        $('#table_staff').DataTable().destroy();
     }
 
     $(document).ready(function () {
-        var table = $('#example').DataTable({
+        var table = $('#table_staff').DataTable({
             buttons: [
                 { extend: 'copy', exportOptions: { columns: ':not(:last-child)' } },
                 { extend: 'csv', exportOptions: { columns: ':not(:last-child)' } },
@@ -129,7 +130,7 @@ function AddAllItemsToTable(TheUser) {
             ]
         });
 
-        table.buttons().container().appendTo('#example_wrapper .col-md-6:eq(0)');
+        table.buttons().container().appendTo('#table_staff_wrapper .col-md-6:eq(0)');
     });
 }
 
@@ -162,43 +163,113 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
+// function AddAllItemsToTable(TheUser) {
+//     userID = 0;
+//     tbody.innerHTML = "";
 
-// Edit Button Functionality
-// function editButtonClicked(idnumber) {
+//     TheUser.reverse().forEach(element => {
+//         StaffManagement(element.idnumber, element.position, element.staff_firstname, element.staff_lastname);
+//     });
+
+//     if ($.fn.DataTable.isDataTable('#table_staff')) {
+//         $('#table_staff').DataTable().clear();
+//         $('#table_staff').DataTable().destroy();
+//     }
+
+//     $(document).ready(function () {
+//         var table = $('#table_staff').DataTable({
+//             buttons: [
+//                 { extend: 'copy', exportOptions: { columns: ':not(:last-child)' } },
+//                 { extend: 'csv', exportOptions: { columns: ':not(:last-child)' } },
+//                 { extend: 'excel', exportOptions: { columns: ':not(:last-child)' } },
+//                 { extend: 'pdf', exportOptions: { columns: ':not(:last-child)' } },
+//                 { extend: 'print', exportOptions: { columns: ':not(:last-child)' } }
+//             ]
+//         });
+
+//         table.buttons().container().appendTo('#table_staff_wrapper .col-md-6:eq(0)');
+//     });
+// }
+
+// // Improved version with async/await and optimized calls
+// async function GetAllDataOnce() {
 //     const user = auth.currentUser;
 
 //     if (user) {
 //         const uid = user.uid;
 //         const dbRef = ref(db, `Registered_Accounts/${uid}/Staff_Management`);
 
-//         onValue(dbRef, (snapshot) => {
-//             snapshot.forEach((childSnapshot) => {
-//                 if (childSnapshot.val().idnumber === idnumber) {
-//                     const userData = childSnapshot.val();
-
-//                     console.log("Fetched Data: ", userData);
-
-//                     // Populate modal fields with user data
-//                     document.getElementById("editIDNumber").value = userData.idnumber;
-//                     document.getElementById("editPosition").value = userData.position;
-//                     document.getElementById("editFirstname").value = userData.staff_firstname;
-//                     document.getElementById("editMiddlename").value = userData.staff_middlename;
-//                     document.getElementById("editLastname").value = userData.staff_lastname;
-//                     document.getElementById("editContactNo").value = userData.staff_contact_no;
-//                     document.getElementById('editGender').value = userData.staff_gender;
-//                     document.getElementById('editAddressInfo').value = userData.staff_address_info;
-
-//                     // Save the user key in the Save button attribute
-//                     document.getElementById("saveEditBtn").setAttribute("data-user-key", childSnapshot.key);
-//                 }
-//             });
-//         }, { onlyOnce: true });
+//         try {
+//             const snapshot = await get(dbRef);
+//             if (snapshot.exists()) {
+//                 let users = [];
+//                 snapshot.forEach((childSnapshot) => {
+//                     users.push(childSnapshot.val());
+//                 });
+//                 AddAllItemsToTable(users);
+//             } else {
+//                 console.log("No data available for this user.");
+//             }
+//         } catch (error) {
+//             console.error("Error fetching data:", error);
+//         }
 //     } else {
 //         console.error("User is not logged in.");
 //     }
 // }
+// auth.onAuthStateChanged((user) => {
+//     if (user) {
+//         GetAllDataOnce();
+//     } else {
+//         console.error("No user is currently logged in.");
+//     }
+// });
 
-let originalData = {}; // Store original data globally
+// Listen for authentication state changes and handle the token
+// onAuthStateChanged(auth, async (user) => {
+//     if (user) {
+//         try {
+//             // Retrieve the ID token for the logged-in user
+//             const idToken = await user.getIdToken();
+//             // Send the token to Flask for verification
+//             sendIdTokenToFlask(idToken);
+//         } catch (error) {
+//             console.error("Error fetching ID token:", error);
+//         }
+//     } else {
+//         console.error("No user is logged in.");
+//     }
+// });
+
+// // Send the Firebase ID token to Flask for user verification
+// async function sendIdTokenToFlask(idToken) {
+//     try {
+//         const response = await fetch('/verify_user', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': `Bearer ${idToken}` // Send token in the Authorization header
+//             },
+//             body: JSON.stringify({ idToken: idToken })
+//         });
+
+//         const data = await response.json();
+//         if (data.uid) {
+//             sessionStorage.setItem("current_uid", data.uid); // Store UID in sessionStorage
+//         } else {
+//             console.error('User verification failed');
+//         }
+//     } catch (error) {
+//         console.error('Error verifying user:', error);
+//     }
+// }
+
+// Function to add users to the table (can be modified for your use case)
+// function AddAllItemsToTable(users) {
+//     console.log("Fetched users:", users);
+// }
+
+let originalData = {};
 
 function editButtonClicked(idnumber) {
     event.preventDefault();

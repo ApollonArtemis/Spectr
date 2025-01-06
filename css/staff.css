@@ -28,7 +28,6 @@
     position: sticky;
     top: 0;
     transition: all 0.3s;
-    border-right: 2px solid rgb(152, 138, 138);
 }
 
 #sidebar.active {
@@ -114,6 +113,7 @@ ul.CTAs a {
     overflow-x: hidden;
     overflow-y: auto;
     height: 100vh;
+    background-color: #000000;
 }
 
 .wrapper.active {
@@ -140,47 +140,6 @@ ul.CTAs a {
     display: none;
 }
 
-
-.carousel img {
-    border: 5px solid black;
-    border-radius: 5%;
-    height: 500px;
-    max-height: 100%;
-}
-
-.cssIntro {
-    border: 3px solid black;
-    border-radius: 20px;
-}
-
-.cssSample {
-    border-radius: 18px;
-    background-color: #e7e7e7;
-    width: 850px;
-    max-width: 100%;
-    overflow-y: auto;
-}
-
-.code-block {
-    border-radius: 5px;
-    border-left: 5px solid #0f3862;
-    background-color: whitesmoke;
-    padding: 1rem;
-}
-
-.code-block .prg1 {
-    text-wrap: wrap;
-}
-
-.code-line {
-    margin: 0;
-}
-
-.info {
-    background-color: #90a8d3;
-    font-size: 1rem;
-}
-
 .backBtn:hover {
     background-color: #dededea1;
 }
@@ -195,47 +154,6 @@ ul.CTAs a {
     transition: 0.5s;
 }
 
-.search-container {
-    position: relative;
-    width: 100%;
-}
-
-.safeFont li {
-    font-weight: normal;
-    font-size: small;
-    margin-bottom: 10px;
-}
-
-#searchicon {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-}
-
-#searchicon img {
-    width: 20px;
-    height: 20px;
-}
-
-#searchstring {
-    width: 100%;
-    padding: 10px 10px 10px 40px;
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
-#cssproperties {
-    margin: 0;
-    padding: 0;
-}
-
-#stats2 {
-    width: 100%;
-    height: 0;
-}
-
-
 /** CAMERA LAYOUT **/
 
 .inner-content2 {
@@ -245,6 +163,14 @@ ul.CTAs a {
     justify-content: center;
     height: 100vh;
     overflow: hidden;
+}
+
+#tr-history {
+    background-color: #0b0b14;
+}
+
+#tr-history th {
+    color: #2ff29e;
 }
 
 
@@ -369,8 +295,20 @@ ul.CTAs a {
 }
 
 
-
 #saveEditBtn {
     background-color: #50a742;
     color: white;
+}
+
+
+/* Change text color for DataTables elements */
+.dataTables_wrapper .dataTables_length label,
+.dataTables_wrapper .dataTables_filter label,
+.dataTables_wrapper .dataTables_info {
+    color: white;
+}
+
+/* Change the text color of "No matching records found" to white */
+.dataTables_empty {
+    color: white !important; /* Set text color to white */
 }

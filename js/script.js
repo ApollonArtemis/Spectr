@@ -196,7 +196,7 @@ $(document).ready(function () {
     });
 });
 
-/*PIN MODAL */
+// /*PIN MODAL */
 // document.getElementById('profile-link').addEventListener('click', function (event) {
 //     event.preventDefault();
 
@@ -239,10 +239,10 @@ $(document).ready(function () {
 //     }
 // });
 
-/*PIN MODAL CANCEL BTN */
-function goToDashboard() {
-    window.location.href = 'client.html';
-}
+// /*PIN MODAL CANCEL BTN */
+// function goToDashboard() {
+//     window.location.href = 'client.html';
+// }
 
 /*URL PATH
 function changeUrl(content) {
