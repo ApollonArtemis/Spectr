@@ -18,10 +18,10 @@ const db = getDatabase();
 const auth = getAuth(app);
 
 let userID = 0;
-let tbody = document.getElementById('tbody1');
+let tbody = document.getElementById('tbody_accountmanagement');
 
 
-function StaffManagement(company_email, company_name, company_branch, company_city) {
+function AccountManagement(company_email, company_name, company_branch, company_city) {
     let trow = document.createElement("tr");
     
 
@@ -81,7 +81,7 @@ function AddAllItemsToTable(TheUser) {
     tbody.innerHTML = "";
 
     TheUser.reverse().forEach(element => {
-        StaffManagement(element.company_email, element.company_name, element.company_branch, element.company_city);
+        AccountManagement(element.company_email, element.company_name, element.company_branch, element.company_city);
     });
 
     if ($.fn.DataTable.isDataTable('#example')) {

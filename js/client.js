@@ -406,7 +406,6 @@ document.getElementById("saveEditBtn").addEventListener("click", function () {
 });
 
 
-
 function viewButtonClicked(idnumber) {
     const user = auth.currentUser;
 
@@ -444,9 +443,6 @@ function viewButtonClicked(idnumber) {
         console.error("User is not logged in.");
     }
 }
-
-
-
 
 
 // Delete Button Functionality

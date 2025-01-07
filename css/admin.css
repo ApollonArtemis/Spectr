@@ -23,7 +23,7 @@ body {
 
 #activeuserheader {
     background-color: #000000;
-    color: #12ed12;
+    color: #b2e616;
 }
 
 #activeuserBG {
@@ -84,6 +84,26 @@ body {
 #btn-addaccount {
     background-color: #000000;
     color: #2ff29e;
+}
+
+#totalearningsheader {
+    background-color: #000000;
+    color: #12ed12;
+}
+
+#totalearningsBG {
+    background-color: #1f1f1f;
+    color: white;
+}
+
+#activitylogsheader {
+    background-color: #000000;
+    color: #1283ed;
+}
+
+#activitylogsBG {
+    background-color: #1f1f1f;
+    color: white;
 }
 
 nav {
