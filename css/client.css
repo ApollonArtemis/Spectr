@@ -62,6 +62,8 @@
     color: #0d0d0d;
     background: #b8b8bb;
     border-radius: 10px;
+    margin-right: 7px;
+    margin-left: 7px;
     font-weight: bold;
 }
 
@@ -101,11 +103,13 @@ ul.CTAs a {
     border-radius: 5px;
     margin-bottom: 5px;
 }
+
 /*
 .hamburger {
     display: none;
 }
 */
+
 /*CONTENT*/
 .wrapper {
     display: flex;
@@ -140,94 +144,12 @@ ul.CTAs a {
     display: none;
 }
 
-
-.carousel img {
-    border: 5px solid black;
-    border-radius: 5%;
-    height: 500px;
-    max-height: 100%;
-}
-
-.cssIntro {
-    border: 3px solid black;
-    border-radius: 20px;
-}
-
-.cssSample {
-    border-radius: 18px;
-    background-color: #e7e7e7;
-    width: 850px;
-    max-width: 100%;
-    overflow-y: auto;
-}
-
-.code-block {
-    border-radius: 5px;
-    border-left: 5px solid #0f3862;
-    background-color: whitesmoke;
-    padding: 1rem;
-}
-
-.code-block .prg1 {
-    text-wrap: wrap;
-}
-
-.code-line {
-    margin: 0;
-}
-
-.info {
-    background-color: #90a8d3;
-    font-size: 1rem;
-}
-
-.backBtn:hover {
-    background-color: #dededea1;
-}
-
-.next-button {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.next-button:hover {
-    background-color: white;
-    color: #0f3862;
-    transition: 0.5s;
-}
-
-.search-container {
-    position: relative;
-    width: 100%;
-}
-
-.safeFont li {
-    font-weight: normal;
-    font-size: small;
-    margin-bottom: 10px;
-}
-
-#searchicon {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-}
-
-#searchicon img {
-    width: 20px;
-    height: 20px;
-}
-
-#searchstring {
-    width: 100%;
-    padding: 10px 10px 10px 40px;
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
-#cssproperties {
-    margin: 0;
-    padding: 0;
+.active-link {
+    background: #b8b8bb;
+    color: #0d0d0d;
+    font-weight: bold;
+    margin: 7px;
+    border-radius: 10px;
 }
 
 #stats2 {
@@ -249,22 +171,26 @@ ul.CTAs a {
 
 
 /* Each row in camera-feed should take up half the available height */
-.camera-feed {  
+.camera-feed {
     height: 100%;
 }
 
 /* Ensures video containers fill their available space */
 .video-container {
-    height:100%;
-    position:relative;
+    height: 100%;
+    position: relative;
 }
 
 /* Style for the camera frames to make them responsive */
 .camera-frame {
-    width: 100%;           /* Fills the container width */
-    height: auto;           /* Scales proportionally */
-    max-height: 100%;       /* Ensures it doesn't exceed container height */
-    object-fit: cover;      /* Maintains aspect ratio without distortion */
+    width: 100%;
+    /* Fills the container width */
+    height: auto;
+    /* Scales proportionally */
+    max-height: 100%;
+    /* Ensures it doesn't exceed container height */
+    object-fit: cover;
+    /* Maintains aspect ratio without distortion */
 }
 
 /* Adjust layout on smaller screens */
@@ -272,8 +198,10 @@ ul.CTAs a {
     .camera-feed {
         flex-direction: column;
     }
+
     .video-container {
-        height: 50%; /* Each camera feed takes up half of the viewport height */
+        height: 50%;
+        /* Each camera feed takes up half of the viewport height */
     }
 }
 
@@ -367,8 +295,6 @@ ul.CTAs a {
 .modal-body {
     background-color: rgb(244, 244, 244);
 }
-
-
 
 #saveEditBtn {
     background-color: #50a742;

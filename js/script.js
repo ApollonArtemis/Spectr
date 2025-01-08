@@ -35,7 +35,7 @@ if (UserInfo && UserInfo.firstname) {
     console.log("Firstname is missing in UserInfo or is undefined.");
 }
 
-if(UserInfo && UserInfo.company_name) {
+if (UserInfo && UserInfo.company_name) {
     userCompanyName.innerText = `${UserInfo.company_name}`;
 } else {
     console.log("Company name is missing in UserInfo or is undefined.");
@@ -47,7 +47,7 @@ if (UserInfo && UserInfo.company_name) {
     console.log("Company name is missing in UserInfo or is undefined.");
 }
 
-if(UserInfo && UserInfo.company_name) {
+if (UserInfo && UserInfo.company_name) {
     displayCompanyName2.innerText = `${UserInfo.company_name}`;
 } else {
     console.log("Company name is missing in UserInfo or is undefined.");
@@ -65,7 +65,7 @@ if (UserInfo && UserInfo.company_address) {
     console.log("Company address is missing in UserInfo or is undefined.");
 }
 
-if(UserInfo && UserInfo.company_telephone_no) {
+if (UserInfo && UserInfo.company_telephone_no) {
     displayCompanyTelephoneNo.innerText = `${UserInfo.company_telephone_no}`;
 } else {
     console.log("Company telephone nummber is missing in UserInfo or is undefined.")
@@ -109,36 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             this.classList.add("active-link");
-        });
-    });
-
-    const nextButtons = document.querySelectorAll(".next-button");
-    nextButtons.forEach((button) => {
-        button.addEventListener("click", function (e) {
-            e.preventDefault();
-            const nextContentId = this.getAttribute("data-next");
-            const nextContent = document.getElementById(nextContentId);
-
-            // Hide all content items
-            document.querySelectorAll(".content-item").forEach((item) => {
-                item.style.display = "none";
-            });
-
-            // Show the next content item
-            if (nextContent) {
-                nextContent.style.display = "block";
-                // Optional: Ensure next content doesn't get focus to prevent scrolling
-                nextContent.tabIndex = -1; // Remove focusability
-            }
-
-            // Update active link
-            links.forEach((link) => {
-                if (link.getAttribute("data-content") === nextContentId) {
-                    link.classList.add("active-link");
-                } else {
-                    link.classList.remove("active-link");
-                }
-            });
         });
     });
 });

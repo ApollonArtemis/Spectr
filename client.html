@@ -15,7 +15,6 @@
     <!-- DATA TABLE CSS (Bootstrap Integration) -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
 
-
     <!-- Font Awesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"></script>
@@ -43,34 +42,29 @@
                     class="d-flex align-items-center p-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <img src="images/logo/SPECTR-logo-new-without-S.png" height="70" alt="SPECTR">
                 </a>
-
                 <!--NAV ITEMS-->
                 <ul class="list-unstyled nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
                     <!--Dashboard-->
                     <li class="event-link mt-5 w-100" data-content="content1">
-                        <a href="javascript:void(0)" class="active-menu nav-link">
+                        <a href="#content1" class="active-menu nav-link">
                             <i class="fs-4 bi-table"></i><span class="ms-1 d-sm-inline">Dashboard</span>
                         </a>
                     </li>
-
                     <!--Detection-->
                     <li class="event-link w-100" data-content="content2">
-                        <a href="javascript:void(0)" class="active-menu nav-link">
+                        <a href="#content2" class="active-menu nav-link">
                             <i class="fs-4 bi-camera-video"></i><span class="ms-1 d-sm-inline">Detection</span>
                         </a>
                     </li>
-
                     <!--Staff Management-->
-                    <li class="event-link w-100" data-content="content3" href="javascript:void(0)"
-                        id="staff-management-link">
-                        <a href="javascript:void(0)" class="nav-link align-middle">
+                    <li class="event-link w-100" data-content="content3" href="#" id="staff-management-link">
+                        <a href="#content3" class="nav-link align-middle">
                             <i class="fs-4 bi-people"></i><span class="ms-1 d-sm-inline">Staff Management</span>
                         </a>
                     </li>
-
                     <!--Reports-->
                     <li class="event-link w-100" data-content="content4">
-                        <a href="javascript:void(0)" class="nav-link align-middle">
+                        <a href="#content4" class="nav-link align-middle">
                             <i class="fs-4 bi-clock-history"></i><span class="ms-1 d-sm-inline">Reports</span>
                         </a>
                     </li>
@@ -85,7 +79,7 @@
                     <span class="d-none d-sm-inline mx-3" id="user_firstname">User</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="event-link dropdown-item" data-content="profile" href="javascript:void(0)"
+                    <li><a class="event-link dropdown-item" data-content="profile" href="#content5"
                             id="profile-link">Profile</a></li>
                     <li>
                         <hr class="dropdown-divider">
@@ -101,7 +95,7 @@
             </button>
 
             <!--CONTENT 1: DASHBOARD-->
-            <div id="content1" class="content-item">
+            <div id="content1" class="content-item" data-title="Dashboard">
                 <div class="inner-content">
                     <div class="row align-items-center">
                         <div class="d-flex flex-column flex-sm-row justify-content-between w-100 mt-3">
@@ -173,7 +167,7 @@
             </div>
 
             <!--CONTENT 2: DETECTION-->
-            <div id="content2" class="content-item">
+            <div id="content2" class="content-item" style="display: block;" data-title="Detection">
                 <div class="inner-content mt-3 p-0 d-flex flex-column mx-auto">
                     <div class="container">
                         <div class="alert alert-danger mt-5" role="alert">
@@ -267,7 +261,7 @@
             </div>
 
             <!--CONTENT 3: MANAGE STAFF-->
-            <div id="content3" class="content-item">
+            <div id="content3" class="content-item" style="display: block;" data-title="Staff Management">
                 <div class="inner-content">
                     <div class="row align-items-center">
                         <div class="d-flex justify-content-between w-100 mt-3">
@@ -310,7 +304,7 @@
             </div>
 
             <!--CONTENT 4: HISTORY-->
-            <div id="content4" class="content-item">
+            <div id="content4" class="content-item" style="display: block;" data-title="History">
                 <div class="row align-items-center">
                     <div class="d-flex justify-content-between w-100 mt-3">
                         <h2 class="fw-bolder">Detection Logs</h2>
@@ -346,7 +340,7 @@
             </div>
 
             <!--CONTENT 5: PROFILE-->
-            <div class="content-item" id="profile">
+            <div class="content-item" id="profile" style="display: block;" data-title="Profile">
                 <div class="inner-content px-1 px-sm-5">
                     <div class="row align-items-center">
                         <div class="d-flex justify-content-between w-100 mt-3">
@@ -462,12 +456,10 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
             <!--CONTENT 6 : ADD STAFF-->
-            <div class="content-item" id="content6">
+            <div class="content-item" id="content6" style="display: block;" data-title="Add Staff">
                 <div class="inner-content">
                     <div class="row align-items-center">
                         <div class="mt-3">
@@ -655,7 +647,7 @@
             </div>
 
             <!--CONTENT 7: EDIT STAFF-->
-            <div class="content-item" id="content7">
+            <div class="content-item" id="content7" style="display: block;" data-title="Edit Staff">
                 <div class="inner-content">
                     <div class="row align-items-center">
                         <div class="mt-3">
@@ -814,7 +806,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 
@@ -1059,6 +1050,7 @@
     <script type="module" src="js/client.js"></script>
     <script type="module" src="js/add_staff.js"></script>
     <script defer src="js/script.js"></script>
+    <script defer src="js/dynamic-title.js"></script>
     <script src="js/camera-feed.js"></script>
     <script src="js/chart.js"></script>
 
