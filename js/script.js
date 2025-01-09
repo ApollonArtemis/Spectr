@@ -1,15 +1,19 @@
 /*SIDEBAR*/
 $(document).ready(function () {
+    // Sidebar toggle functionality
     $("#sidebarCollapse").on("click", function () {
         $("#sidebar").toggleClass("active");
     });
 
-    const homeLink = document.querySelector(
-        '#sidebar .event-link[data-content="content1"]'
-    );
+    // Activate the first menu item on page load
+    const homeLink = document.querySelector('#sidebar .event-link[data-content="content1"]');
     if (homeLink) {
-        homeLink.click();
         homeLink.classList.add("active-link");
+        const targetContentId = homeLink.getAttribute("data-content");
+        const targetContent = document.querySelector(`#${targetContentId}`);
+        if (targetContent) {
+            targetContent.style.display = "block";
+        }
     }
 });
 
@@ -96,22 +100,37 @@ document.addEventListener("DOMContentLoaded", function () {
         link.addEventListener("click", function (event) {
             event.preventDefault();
 
+            // Remove the active state from all links
             links.forEach((l) => l.classList.remove("active-link"));
 
-            const targetContentId = this.getAttribute("data-content");
-
+            // Hide all content items
             contentItems.forEach((item) => {
-                if (item.id === targetContentId) {
-                    item.style.display = "block";
-                } else {
-                    item.style.display = "none";
-                }
+                item.style.display = "none";
             });
 
+            // Add the active state to the clicked link
             this.classList.add("active-link");
+
+            // Show the corresponding content
+            const targetContentId = this.getAttribute("data-content");
+            const targetContent = document.querySelector(`#${targetContentId}`);
+            if (targetContent) {
+                targetContent.style.display = "block";
+            }
         });
     });
+
+    // Set the default active link on page load (first link)
+    const defaultLink = document.querySelector("#sidebar .event-link[data-content='content1']");
+    if (defaultLink) {
+        defaultLink.classList.add("active-link");
+        const defaultContent = document.querySelector("#content1");
+        if (defaultContent) {
+            defaultContent.style.display = "block";
+        }
+    }
 });
+
 
 
 /*DATE*/
