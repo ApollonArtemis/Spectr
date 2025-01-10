@@ -17,82 +17,77 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const auth = getAuth(app);
 
-let shopliftingCount = 0;
-let robberyCount = 0;
-let totalIncidents = 0;
+// Select DOM elements
+const tbody = document.getElementById('tbody_detection');
 
-const shopliftingCountElement = document.getElementById('shopliftingCount');
-const robberyCountElement = document.getElementById('robberyCount');
-const totalIncidentsElement = document.getElementById('totalIncidents');
-let chart3;
 
-function renderDonutChart(shoplifting, robbery) {
-    const donutGraph = {
-        chart: {
-            type: 'donut',
-            height: '250',
-        },
-        series: [shoplifting, robbery], // Shoplifting and Robbery counts
-        labels: ['Shoplifting', 'Robbery'],
-        plotOptions: {
-            pie: {
-                donut: {
-                    labels: {
-                        show: true,
-                        name: {
-                            fontSize: '22px',
-                            fontWeight: 600,
-                            color: '#000', // White font for the label name
-                            offsetY: 20
-                        },
-                        value: {
-                            fontSize: '16px',
-                            fontWeight: 400,
-                            color: '#000', // White font for the value
-                            offsetY: -20
-                        }
-                    }
-                }
-            }
-        },
-        colors: ['#4CAF50', '#F44336'],
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                chart: { width: 200 },
-                legend: { position: 'bottom' }
-            }
-        }]
-    };
+function Detection(date, time, camera, type) {
+    let trow = document.createElement("tr");
 
-    if (!chart3) {
-        chart3 = new ApexCharts(document.querySelector("#chart3"), donutGraph);
-        chart3.render();
-    } else {
-        chart3.updateSeries([shoplifting, robbery]);
-    }
+    let td1 = document.createElement('td');
+    let td2 = document.createElement('td');
+    let td3 = document.createElement('td');
+    let td4 = document.createElement('td');
+    let td5 = document.createElement('td');
+
+    td1.classList.add('text-center');
+    td2.classList.add('text-center');
+    td3.classList.add('text-center');
+    td4.classList.add('text-center');
+    td5.classList.add('text-center');
+
+    td1.innerHTML = date;
+    td2.innerHTML = time;
+    td3.innerHTML = camera;
+    td4.innerHTML = type;
+
+    let buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('d-flex', 'justify-content-center', 'gap-2', 'flex-column', 'flex-sm-row');
+
+    let viewBtn = document.createElement('button');
+    viewBtn.type = "button";
+    viewBtn.className = "btn text-sm";
+    viewBtn.style.backgroundColor = "rgb(49, 101, 147)";
+    viewBtn.style.color = "white";
+    viewBtn.innerHTML = "<img src='images/icons/download-button.png' alt='Download'> Download";
+
+    buttonContainer.appendChild(viewBtn);
+
+    td5.appendChild(buttonContainer);
+
+    trow.appendChild(td1);
+    trow.appendChild(td2);
+    trow.appendChild(td3);
+    trow.appendChild(td4);
+    trow.appendChild(td5);
+
+    tbody.appendChild(trow);
 }
 
+function AddAllItemsToTable(detectionData) {
+    tbody.innerHTML = "";
 
-function updateIncidentCounts(detections) {
-    shopliftingCount = 0;
-    robberyCount = 0;
-
-    detections.forEach(detection => {
-        if (detection.type === "Shoplifting") {
-            shopliftingCount++;
-        } else if (detection.type === "Robbery") {
-            robberyCount++;
-        }
+    detectionData.reverse().forEach(element => {
+        Detection(element.date, element.time, element.camera, element.type);
     });
 
-    totalIncidents = shopliftingCount + robberyCount;
+    if ($.fn.DataTable.isDataTable('#table_detection')) {
+        $('#table_detection').DataTable().clear();
+        $('#table_detection').DataTable().destroy();
+    }
 
-    shopliftingCountElement.textContent = shopliftingCount;
-    robberyCountElement.textContent = robberyCount;
-    totalIncidentsElement.textContent = totalIncidents;
-
-    renderDonutChart(shopliftingCount, robberyCount);
+    $(document).ready(function () {
+        var table = $('#table_detection').DataTable({
+            buttons: [
+                { extend: 'copy', exportOptions: { columns: ':not(:last-child)' } },
+                { extend: 'csv', exportOptions: { columns: ':not(:last-child)' } },
+                { extend: 'excel', exportOptions: { columns: ':not(:last-child)' } },
+                { extend: 'pdf', exportOptions: { columns: ':not(:last-child)' } },
+                { extend: 'print', exportOptions: { columns: ':not(:last-child)' } }
+            ]
+        });
+        table.buttons().container().appendTo('#table_detection_wrapper .col-md-6:eq(0)');
+    });
 }
 
 function GetAllDataOnce() {
@@ -117,7 +112,7 @@ function GetAllDataOnce() {
                 });
             });
 
-            updateIncidentCounts(detections);
+            AddAllItemsToTable(detections);
         });
     } else {
         console.error("User is not logged in.");
