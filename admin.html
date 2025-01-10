@@ -26,8 +26,6 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <link rel="stylesheet" href="css/calendar.css">
 </head>
 
 <body>
@@ -45,9 +43,7 @@
         </div>
     </nav>
 
-
     <div class="container-fluid py-2 content">
-
         <div class="d-flex flex-column flex-sm-row justify-content-between w-100 mt-3 mb-3">
             <h2 class="fw-bolder text-white">Dashboard</h2>
             <div class="d-flex align-items-center">
@@ -59,6 +55,7 @@
         <div class="row">
             <div class="col">
                 <div class="row mb-3">
+                    <!--ACTIVE USERS-->
                     <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
                         <div class="card rounded-4" id="activeuserBG">
                             <div id="activeuserheader" class="card-header rounded-top-4">
@@ -70,6 +67,7 @@
                             <p id="activeUsersCount" class="py-5 fw-semibold fs-1 text-center mt-3">0</p>
                         </div>
                     </div>
+                    <!--INACTIVE USERS-->
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="card rounded-4" id="inactiveuserBG">
                             <div id="inactiveuserheader" class="card-header rounded-top-4">
@@ -83,6 +81,7 @@
                     </div>
                 </div>
                 <div class="row mt-3">
+                    <!--SUSPENDED USERS-->
                     <div class="col-lg-6 col-md-12 col-sm-6 mb-3">
                         <div class="card rounded-4" id="suspendeduserBG">
                             <div id="suspendeduserheader" class="card-header rounded-top-4">
@@ -94,6 +93,7 @@
                             <p id="suspendedUsersCount" class="py-5 fw-semibold fs-1 text-center">0</p>
                         </div>
                     </div>
+                    <!--TOTAL EARNINGS-->
                     <div class="col-lg-6 col-md-12 col-sm-6 mb-3">
                         <div class="card rounded-4" id="totalearningsBG">
                             <div id="totalearningsheader" class="card-header rounded-top-4">
@@ -107,35 +107,46 @@
                     </div>
                 </div>
             </div>
+            <!--ACCOUNT MANAGEMENT-->
             <div class="col">
                 <div class="card rounded-4" id="activitylogsBG">
                     <div id="activitylogsheader" class="card-header rounded-top-4">
                         <div class="d-flex align-items-center">
-                            <i class="bi bi-activity me-2"></i>
-                            <p class="fw-bolder text-start fs-5 py-3">Activity Logs</p>
+                            <i class="bi bi-person-gear me-2"></i>
+                            <p class="fw-bolder text-start fs-5 py-3">Account Management</p>
                         </div>
                     </div>
-                    <div class="table-responsive p-3 mt-3">
-                        <div class="data_table" style="height: 55.7vh;">
-                            <table id="activitylogs" class="table borderless" style="width:100%">
-                                <thead>
-                                    <tr id="tr-accmanagement" class="text-center">
-                                        <th class="text-center">User</th>
-                                        <th class="text-center">Date</th>
-                                        <th class="text-center">Time</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tbody_activitylogs"></tbody>
-                            </table>
+                    <div class="container p-3 rounded-bottom-4" id="tblAccManagementBG">
+                        <div class="d-flex justify-content-end align-item-end mt-3">
+                            <button type="button" id="btn-addaccount" class="mb-2 btn px-2" data-bs-toggle="modal"
+                                data-bs-target="#multiStepModal">
+                                <i class="bi bi-person-fill-add"></i> Add New Account
+                            </button>
+                        </div>
+                        <div class="table-responsive p-3 mt-3">
+                            <div class="data_table" style="height: 42.2vh;">
+                                <table id="example" class="table borderless" style="width:100%">
+                                    <thead>
+                                        <tr id="tr-accmanagement" class="text-center">
+                                            <th class="text-center">Company Email</th>
+                                            <th class="text-center">Company Name</th>
+                                            <th class="text-center">Company Branch</th>
+                                            <th class="text-center">Company Location</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody_accountmanagement"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!--USERS PER MONTH / DETECTIONS PER MONTH-->
         <div class="row mt-5">
-            <div class="col">
+            <div class="col mb-3">
                 <div class="card rounded-4" id="linegraphBG">
                     <div id="usageheader" class="card-header rounded-top-4">
                         <div class="d-flex align-items-center py-3">
@@ -160,40 +171,35 @@
         </div>
 
         <div class="row gy-3 mt-5">
+            <!--ACTIVITY LOGS-->
             <div class="col-lg-8 col-md-12">
-                <div class="card rounded-4">
+                <div class="card rounded-4" id="activitylogsBG">
                     <div id="accmanagementheader" class="card-header rounded-top-4">
                         <div class="d-flex align-items-center">
-                            <i class="bi bi-person-gear me-2"></i>
-                            <p class="fw-bolder text-start fs-5 py-3">Account Management</p>
+                            <i class="bi bi-activity me-2"></i>
+                            <p class="fw-bolder text-start fs-5 py-3">Activity Logs</p>
+                        </div>
+                        
+                    </div>
+                    <div class="table-responsive p-3 mt-3">
+                        <div class="data_table" style="height: 60.4vh;">
+                            <table id="activitylogs" class="table borderless" style="width:100%">
+                                <thead>
+                                    <tr id="tr-accmanagement" class="text-center">
+                                        <th class="text-center">User</th>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-center">Time</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_activitylogs"></tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="container p-3 rounded-bottom-4" id="tblAccManagementBG">
-                        <div class="d-flex justify-content-end align-item-end mt-3">
-                            <button type="button" id="btn-addaccount" class="mb-2 btn px-2" data-bs-toggle="modal"
-                                data-bs-target="#multiStepModal">
-                                <i class="bi bi-person-fill-add"></i> Add New Account
-                            </button>
-                        </div>
-                        <div class="table-responsive p-3 mt-3">
-                            <div class="data_table" style="height: 47.2vh;">
-                                <table id="example" class="table borderless" style="width:100%">
-                                    <thead>
-                                        <tr id="tr-accmanagement" class="text-center">
-                                            <th class="text-center">Company Email</th>
-                                            <th class="text-center">Company Name</th>
-                                            <th class="text-center">Company Branch</th>
-                                            <th class="text-center">Company Location</th>
-                                            <th class="text-center">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbody_accountmanagement"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
+            <!--REGISTERED ACCOUNTS-->
             <div class="col-lg-4 col-md-12">
                 <div class="card rounded-4" id="donutgraphBG">
                     <div id="accmanagementheader" class="card-header rounded-top-4">
@@ -207,41 +213,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <script>
-        var options = {
-            chart: {
-                type: 'donut'
-            },
-            series: [44, 55, 13, 43],
-            labels: ['Apple', 'Mango', 'Banana', 'Orange'],
-            plotOptions: {
-                pie: {
-                    donut: {
-                        labels: {
-                            show: true,
-                            name: {
-                                fontSize: '22px',
-                                fontWeight: 600,
-                                color: '#000',
-                                offsetY: 20
-                            },
-                            value: {
-                                fontSize: '16px',
-                                fontWeight: 400,
-                                color: '#000',
-                                offsetY: -20
-                            }
-                        }
-                    }
-                }
-            },
-        };
-    
-        var chart = new ApexCharts(document.querySelector("#chart3"), options);
-        chart.render();
-    </script> -->
-
 
     <!-- Modal -->
     <div class="modal fade" id="multiStepModal" data-bs-backdrop="static" tabindex="-1"
