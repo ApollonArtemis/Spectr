@@ -151,6 +151,29 @@ ul.CTAs a {
     height: 0;
 }
 
+#shopliftingBG, #robberyBG, #totalincidentsBG {
+    background-color: #cbcecb;
+}
+
+#detectionpermonthBG,   #registeredaccBG {
+    background-color: #f2ebeb;
+}
+
+/* #robberyheader {
+    background-color: #5f0404;
+    color: #fff;
+}
+
+#totalincidentsheader {
+    background-color: #e4a419;
+    color: #fff;
+} */
+
+#detectionpermonthheader, #totalincidentsheader, #robberyheader, #shopliftingheader, #registeredaccheader  {
+    background-color: #181818;
+    color: #2ff29e;
+}
+
 
 /** CAMERA LAYOUT **/
 

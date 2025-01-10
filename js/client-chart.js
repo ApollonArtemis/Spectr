@@ -91,44 +91,5 @@ get(registeredAccountsRef).then((snapshot) => {
     }
     var chartlineGraph = new ApexCharts(document.querySelector("#detectionPerMonth"), lineGraph);
     chartlineGraph.render();
-
-    const donutGraph = {
-        chart: {
-            type: 'donut',
-            height: 300
-        },
-        series: [activeUsers, inactiveUsers], // Active and Inactive users
-        labels: ['Shoplifting', 'Roberry'],
-        plotOptions: {
-            pie: {
-                donut: {
-                    labels: {
-                        show: true,
-                        name: {
-                            fontSize: '22px',
-                            fontWeight: 600,
-                            color: '#000', // White font for the label name
-                            offsetY: 20
-                        },
-                        value: {
-                            fontSize: '16px',
-                            fontWeight: 400,
-                            color: '#000', // White font for the value
-                            offsetY: -20
-                        }
-                    }
-                }
-            }
-        },
-        colors: ['#4CAF50', '#F44336'], // Green for active, Red for inactive
-        theme: {
-            mode: 'light' // Ensure overall dark theme for better contrast
-        }
-    };
-
-    // Render the chart
-    const chartpieGraph = new ApexCharts(document.querySelector("#chart3"), donutGraph);
-    chartpieGraph.render();
-
 });
 

@@ -268,6 +268,5 @@ get(registeredAccountsRef).then((snapshot) => {
   // Render the chart
   const chartpieGraph = new ApexCharts(document.querySelector("#chart3"), donutGraph);
   chartpieGraph.render();
-
 });
 
