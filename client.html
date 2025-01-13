@@ -84,12 +84,9 @@
                     <img src="images/staff-profile.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
                     <span class="d-none d-sm-inline mx-3" id="user_firstname">User</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="event-link dropdown-item" data-content="profile" href="#content5"
-                            id="profile-link">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow rounded-4 p-0">
+                    <li id="profile-menu"><a class="event-link dropdown-item" data-content="profile" href="#content5"
+                            id="profile-link">Accounts</a></li>
                     <li><a class="dropdown-item" href="#" id="signoutbutton">Sign out</a></li>
                 </ul>
             </div>
@@ -107,12 +104,11 @@
                         <div class="d-flex flex-column flex-sm-row justify-content-between w-100 mt-3">
                             <h2 class="fw-bolder">Dashboard</h2>
                             <div class="d-flex align-items-center">
-                                <i class="bi-calendar me-2"></i>
+                                <i class="fa-regular fa-calendar-days me-2"></i>
                                 <p id="currentDate" class="mb-0"></p>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <!--SHOPLIFTING-->
                         <div class="col-lg-4 col-sm-6 py-4">
@@ -139,7 +135,7 @@
                             </div>
                         </div>
                         <!--TOTAL INCIDENTS-->
-                        <div class="col-lg-4 col-sm-6 py-4">
+                        <div class="col-lg-4 col-md-12 col-sm-6 py-4">
                             <div class="card rounded-4 border-1 solid shadow" id="totalincidentsBG">
                                 <div id="totalincidentsheader" class="card-header rounded-top-4">
                                     <div class="d-flex align-items-center">
@@ -154,27 +150,27 @@
 
                     <!--DETECTION PER MONTH / DONUT GRAPH-->
                     <div class="row">
-                        <div class="col-xxl-8">
+                        <div class="col-xxl-8 mb-3 mt-3">
                             <div class="card rounded-4 border-1 solid shadow" id="detectionpermonthBG">
                                 <div id="detectionpermonthheader" class="card-header rounded-top-4">
                                     <div class="d-flex align-items-center py-3">
                                         <i class="fa-solid fa-chart-bar me-2"></i>
-                                        <p class="fw-bolder fs-5">Total of Detection Per Month</p>
+                                        <p class="fw-bolder fs-5">Detection Per Month</p>
                                     </div>
                                 </div>
                                 <div class="p-4" id="detectionPerMonth"></div>
                             </div>
                         </div>
                         <!--DONUT GRAPH-->
-                        <div class="col-xxl-4 col-md-12">
+                        <div class="col-xxl-4 col-md-12 mt-3">
                             <div class="card rounded-4 border-1 solid shadow" id="registeredaccBG">
                                 <div id="registeredaccheader" class="card-header rounded-top-4">
                                     <div class="d-flex align-items-center">
                                         <i class="fa-solid fa-chart-pie me-2"></i>
-                                        <p class="fw-bolder text-start fs-5 py-3">Detection</p>
+                                        <p class="fw-bolder text-start fs-5 py-3">Incident Detection Summary</p>
                                     </div>
                                 </div>
-                                <div class="py-5" id="chart3"></div>
+                                <div class="py-4" id="chart3"></div>
                             </div>
                         </div>
                     </div>
@@ -337,7 +333,7 @@
                                 <table id="table_detection" class="table table-bordered table-striped"
                                     style="width:100%">
                                     <thead>
-                                        <tr class="text-center">
+                                        <tr id="history-tr" class="text-center">
                                             <th class="text-center">Date</th>
                                             <th class="text-center">Time</th>
                                             <th class="text-center">Camera</th>
@@ -1062,11 +1058,11 @@
 
     <!-- Scripts -->
     <script type="module" src="js/client.js"></script>
+    <script defer src="js/script.js"></script>
     <script type="module" src="js/client-chart.js"></script>
     <script type="module" src="js/donut_chart.js"></script>
 
     <script type="module" src="js/add_staff.js"></script>
-    <script defer src="js/script.js"></script>
     <script defer src="js/dynamic-title.js"></script>
     <script src="js/camera-feed.js"></script>
     <script src="js/chart.js"></script>

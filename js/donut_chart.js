@@ -26,52 +26,55 @@ const robberyCountElement = document.getElementById('robberyCount');
 const totalIncidentsElement = document.getElementById('totalIncidents');
 let chart3;
 
-function renderDonutChart(shoplifting, robbery) {
-    const donutGraph = {
+function renderPieChart(shoplifting, robbery) {
+    const pieGraph = {
         chart: {
-            type: 'donut',
-            height: '250',
+            type: 'pie',
+            height: '100%', // Automatically adjust height
         },
         series: [shoplifting, robbery], // Shoplifting and Robbery counts
         labels: ['Shoplifting', 'Robbery'],
-        plotOptions: {
-            pie: {
-                donut: {
-                    labels: {
-                        show: true,
-                        name: {
-                            fontSize: '22px',
-                            fontWeight: 600,
-                            color: '#000', // White font for the label name
-                            offsetY: 20
-                        },
-                        value: {
-                            fontSize: '16px',
-                            fontWeight: 400,
-                            color: '#000', // White font for the value
-                            offsetY: -20
-                        }
+        colors: ['#4CAF50', '#F44336'], // Green for shoplifting, red for robbery
+        responsive: [
+            {
+                breakpoint: 1024, // For tablets
+                options: {
+                    chart: {
+                        width: '100%', // Full width
+                        height: 250,   // Fixed height for tablets
+                    },
+                    legend: {
+                        position: 'bottom',
+                        fontSize: '14px',
+                    }
+                }
+            },
+            {
+                breakpoint: 480, // For mobile devices
+                options: {
+                    chart: {
+                        width: '100%', // Full width for small devices
+                        height: '100%',   // Smaller height
+                    },
+                    legend: {
+                        position: 'bottom',
+                        fontSize: '12px',
                     }
                 }
             }
-        },
-        colors: ['#4CAF50', '#F44336'],
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                chart: { width: 200 },
-                legend: { position: 'bottom' }
-            }
-        }]
+        ]
     };
 
+    // Render or update the chart
     if (!chart3) {
-        chart3 = new ApexCharts(document.querySelector("#chart3"), donutGraph);
+        chart3 = new ApexCharts(document.querySelector("#chart3"), pieGraph);
         chart3.render();
     } else {
         chart3.updateSeries([shoplifting, robbery]);
     }
 }
+
+
 
 
 function updateIncidentCounts(detections) {
@@ -92,7 +95,7 @@ function updateIncidentCounts(detections) {
     robberyCountElement.textContent = robberyCount;
     totalIncidentsElement.textContent = totalIncidents;
 
-    renderDonutChart(shopliftingCount, robberyCount);
+    renderPieChart(shopliftingCount, robberyCount);
 }
 
 function GetAllDataOnce() {

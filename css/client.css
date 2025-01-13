@@ -61,6 +61,13 @@
     font-weight: bold;
 }
 
+#profile-menu:hover {
+    color: #0d0d0d;
+    background: #2ff29e;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
 .active-link {
     background: #2ff29e;
     color: #0d0d0d;
@@ -171,6 +178,13 @@ ul.CTAs a {
 
 #detectionpermonthheader, #totalincidentsheader, #robberyheader, #shopliftingheader, #registeredaccheader  {
     background-color: #181818;
+    color: #2ff29e;
+}
+
+#history-tr {
+    background-color: #181818;
+}
+#history-tr th {
     color: #2ff29e;
 }
 
@@ -298,6 +312,7 @@ ul.CTAs a {
 .data_table .btn {
     padding: 5px 10px;
     margin: 10px 3px 10px 0;
+    background-color: #181818;
 }
 
 .modal .btn-close {

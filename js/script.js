@@ -1,3 +1,14 @@
+/*DATE*/
+document.addEventListener("DOMContentLoaded", function () {
+    const dateElement = document.getElementById("currentDate");
+
+    const date = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = date.toLocaleDateString(undefined, options);
+
+    dateElement.textContent = formattedDate;
+});
+
 /*SIDEBAR*/
 $(document).ready(function () {
     // Sidebar toggle functionality
@@ -129,19 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
             defaultContent.style.display = "block";
         }
     }
-});
-
-
-
-/*DATE*/
-document.addEventListener("DOMContentLoaded", function () {
-    const dateElement = document.getElementById("currentDate");
-
-    const date = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = date.toLocaleDateString(undefined, options);
-
-    dateElement.textContent = formattedDate;
 });
 
 /*SHOW PASSWORD AND PIN EYE TOGGLER*/

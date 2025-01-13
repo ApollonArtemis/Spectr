@@ -1,16 +1,6 @@
-/*DATE*/
-document.addEventListener("DOMContentLoaded", function () {
-    const dateElement = document.getElementById("currentDate");
-
-    const date = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = date.toLocaleDateString(undefined, options);
-
-    dateElement.textContent = formattedDate;
-});
-
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
 // Firebase configuration
@@ -28,68 +18,116 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const auth = getAuth(app);
 
-// Reference to the 'Registered_Accounts' node
-const registeredAccountsRef = ref(database, 'Registered_Accounts');
+// Listen for the user's authentication state
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const uid = user.uid;
 
-// Fetch the accounts and count them
-get(registeredAccountsRef).then((snapshot) => {
-    const accounts = snapshot.val();
-    const activeUsers = accounts ? Object.keys(accounts).length : 0; // Assuming all users are active
-    const inactiveUsers = 0; // No inactive users for now
+        // Reference to the 'Detection' node of the logged-in user
+        const detectionRef = ref(database, `Registered_Accounts/${uid}/Detection`);
 
-    var lineGraph = {
-        chart: {
-            type: 'line',
-            height: 300,
-            foreColor: '#000'
-        },
-        plotOptions: {
-            bar: {
-                horizontal: true
+        // Fetch the data
+        get(detectionRef).then((snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                const monthlyData = {
+                    Shoplifting: Array(12).fill(0), // Initialize 12 months for Shoplifting
+                    Robbery: Array(12).fill(0)       // Initialize 12 months for Robbery
+                };
+
+                // Loop through each camera and each detection
+                for (const camera in data) {
+                    for (const detectionId in data[camera]) {
+                        const detection = data[camera][detectionId];
+                        const date = new Date(detection.date);  // Convert to Date object
+                        const month = date.getMonth();         // Get the month (0-11)
+
+                        // Increment count based on detection type
+                        if (detection.type === "Shoplifting") {
+                            monthlyData.Shoplifting[month]++;
+                        } else if (detection.type === "Robbery") {
+                            monthlyData.Robbery[month]++;
+                        }
+                    }
+                }
+
+                // Prepare data for the chart
+                var options = {
+                    series: [{
+                        name: 'Shoplifting',
+                        data: monthlyData.Shoplifting
+                    }, {
+                        name: 'Robbery',
+                        data: monthlyData.Robbery
+                    }],
+                    chart: {
+                        type: 'bar',
+                        height: '100%'
+                    },
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: '55%',
+                            borderRadius: 5,
+                            borderRadiusApplication: 'end'
+                        },
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'No. of Detections'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " detections"
+                            }
+                        }
+                    },
+                    responsive: [{
+                        breakpoint: 768, // For tablets and mobile devices
+                        options: {
+                            chart: {
+                                width: '100%',
+                                height: '100%'
+                            },
+                            plotOptions: {
+                                bar: {
+                                    columnWidth: '65%' // Slightly narrower bars
+                                }
+                            },
+                            legend: {
+                                position: 'bottom', // Move legend to bottom for small screens
+                                fontSize: '10px'
+                            }
+                        }
+                    }]
+                };
+
+                // Render the chart
+                var chart = new ApexCharts(document.querySelector("#detectionPerMonth"), options);
+                chart.render();
             }
-        },
-        series: [{
-            data: [{
-                x: 'January',
-                y: 10
-            }, {
-                x: 'February',
-                y: 18
-            }, {
-                x: 'March',
-                y: 13
-            }, {
-                x: 'April',
-                y: 13
-            }, {
-                x: 'May',
-                y: 13
-            }, {
-                x: 'June',
-                y: 13
-            }, {
-                x: 'July',
-                y: 13
-            }, {
-                x: 'August',
-                y: 13
-            }, {
-                x: 'September',
-                y: 13
-            }, {
-                x: 'October',
-                y: 13
-            }, {
-                x: 'November',
-                y: 13
-            }, {
-                x: 'December',
-                y: 13
-            }]
-        }]
+        }).catch((error) => {
+            console.error("Error fetching data:", error);
+        });
+    } else {
+        console.log("No user is signed in.");
     }
-    var chartlineGraph = new ApexCharts(document.querySelector("#detectionPerMonth"), lineGraph);
-    chartlineGraph.render();
 });
-
