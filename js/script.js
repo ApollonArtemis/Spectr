@@ -9,30 +9,19 @@ document.addEventListener("DOMContentLoaded", function () {
     dateElement.textContent = formattedDate;
 });
 
-/*SIDEBAR*/
+/* SIDEBAR TOGGLE */
 $(document).ready(function () {
     // Sidebar toggle functionality
     $("#sidebarCollapse").on("click", function () {
         $("#sidebar").toggleClass("active");
     });
-
-    // Activate the first menu item on page load
-    const homeLink = document.querySelector('#sidebar .event-link[data-content="content1"]');
-    if (homeLink) {
-        homeLink.classList.add("active-link");
-        const targetContentId = homeLink.getAttribute("data-content");
-        const targetContent = document.querySelector(`#${targetContentId}`);
-        if (targetContent) {
-            targetContent.style.display = "block";
-        }
-    }
 });
 
 /* SIGN OUT BTN */
 let UserCreds = JSON.parse(sessionStorage.getItem("user-creds"));
 let UserInfo = JSON.parse(sessionStorage.getItem("user-info"));
 
-console.log(UserInfo);
+// console.log(UserInfo);
 
 let userFirstname = document.getElementById('user_firstname');
 let userCompanyName = document.getElementById('company_name');
@@ -103,10 +92,35 @@ let CheckCred = () => {
 window.addEventListener('load', CheckCred);
 signoutButton.addEventListener('click', Signout);
 
+/* CONTENT AND SIDEBAR LOGIC */
 document.addEventListener("DOMContentLoaded", function () {
     const links = document.querySelectorAll("#sidebar .event-link");
     const contentItems = document.querySelectorAll(".content-item");
 
+    // Load the last active link and content from localStorage
+    const lastActiveContentId = localStorage.getItem("activeContent");
+    if (lastActiveContentId) {
+        links.forEach((link) => {
+            if (link.getAttribute("data-content") === lastActiveContentId) {
+                link.classList.add("active-link");
+            }
+        });
+        contentItems.forEach((item) => {
+            item.style.display = item.id === lastActiveContentId ? "block" : "none";
+        });
+    } else {
+        // Set the default active link if no previous data is found
+        const defaultLink = document.querySelector("#sidebar .event-link[data-content='content1']");
+        if (defaultLink) {
+            defaultLink.classList.add("active-link");
+            const defaultContent = document.querySelector("#content1");
+            if (defaultContent) {
+                defaultContent.style.display = "block";
+            }
+        }
+    }
+
+    // Add click event to all links
     links.forEach((link) => {
         link.addEventListener("click", function (event) {
             event.preventDefault();
@@ -127,19 +141,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const targetContent = document.querySelector(`#${targetContentId}`);
             if (targetContent) {
                 targetContent.style.display = "block";
+
+                // Save the active content to localStorage
+                localStorage.setItem("activeContent", targetContentId);
             }
         });
     });
-
-    // Set the default active link on page load (first link)
-    const defaultLink = document.querySelector("#sidebar .event-link[data-content='content1']");
-    if (defaultLink) {
-        defaultLink.classList.add("active-link");
-        const defaultContent = document.querySelector("#content1");
-        if (defaultContent) {
-            defaultContent.style.display = "block";
-        }
-    }
 });
 
 /*SHOW PASSWORD AND PIN EYE TOGGLER*/
@@ -173,7 +180,7 @@ $(document).ready(function () {
         /*
         const newPinInput = $("#newPin");
         const confirmNewPinInput = $("#confirmNewPin");
-
+ 
         if (targetInputId === "confirmNewPin") {
             togglePasswordVisibility(newPinInput, $("#passwordToggleBtn i.bi-eye"), $("#passwordToggleBtn i.bi-eye-slash"));
         } else if (targetInputId === "newPin") {
@@ -234,34 +241,48 @@ $(document).ready(function () {
 /*URL PATH
 function changeUrl(content) {
     const newUrl = `client.html#${content}`;
-
+ 
     window.history.pushState({}, "", newUrl);
-
+ 
     const allSections = document.querySelectorAll('.content');
     allSections.forEach(section => section.style.display = 'none');
-
+ 
     const selectedContent = document.getElementById(content); 
     if (selectedContent) {
         selectedContent.style.display = 'block'; 
     }
 } */
 
-/*STAFF MANAGEMENT TO ADD STAFF CONTENT */
-function showContent6() {
+// CONTENT 5: ACCOUNTS
+function goToContent5(event) {
     event.preventDefault();
+    document.getElementById('content1').style.display = 'none'; // Dashboard
+    document.getElementById('content3').style.display = 'none'; // Staff Management
+    document.getElementById('accounts').style.display = 'block'; // Accounts
 
-    document.getElementById('content3').style.display = 'none';
-    document.getElementById('content6').style.display = 'block';
-
-    window.location.hash = '#staff_management/#add_staff';
+    // Save the active content to localStorage
+    localStorage.setItem("activeContent", "accounts");
 }
 
-function goToContent3(event) {
+// CONTENT 6: ADD STAFF
+function showContent6(event) {
     event.preventDefault();
 
-    document.getElementById('content3').style.display = 'block';
-    document.getElementById('content6').style.display = 'none';
-    document.getElementById('content7').style.display = 'none';
+    document.getElementById('content3').style.display = 'none'; // Staff Management
+    document.getElementById('content6').style.display = 'block'; // Add Staff
 
-    window.location.hash = '#staff_management';
+    // Save the active content to localStorage
+    localStorage.setItem("activeContent", "content6");
+}
+
+// CONTENT 7: EDIT STAFF
+function goToStaffManagement(event) {
+    event.preventDefault();
+
+    document.getElementById('content3').style.display = 'block'; // Staff Management
+    document.getElementById('content6').style.display = 'none'; // Add Staff
+    document.getElementById('content7').style.display = 'none'; // Edit Staff
+
+    // Save the active content to localStorage
+    localStorage.setItem("activeContent", "content3");
 }

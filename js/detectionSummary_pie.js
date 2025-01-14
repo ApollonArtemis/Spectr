@@ -41,7 +41,7 @@ function renderPieChart(shoplifting, robbery) {
                 options: {
                     chart: {
                         width: '100%', // Full width
-                        height: 250,   // Fixed height for tablets
+                        height: '100%',   // Fixed height for tablets
                     },
                     legend: {
                         position: 'bottom',
@@ -74,10 +74,24 @@ function renderPieChart(shoplifting, robbery) {
     }
 }
 
+function showEmptyState() {
+    document.querySelector("#chart3").innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 50px;">
+            <p style="font-size: 18px; color: #000000; font-weight: bold;">No Data Available</p>
+        </div>
+    `;
 
-
+    shopliftingCountElement.textContent = 0;
+    robberyCountElement.textContent = 0;
+    totalIncidentsElement.textContent = 0;
+}
 
 function updateIncidentCounts(detections) {
+    if (detections.length === 0) {
+        showEmptyState(); // Show empty state if no data
+        return;
+    }
+
     shopliftingCount = 0;
     robberyCount = 0;
 

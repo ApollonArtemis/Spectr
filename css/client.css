@@ -68,6 +68,13 @@
     font-weight: bold;
 }
 
+#profile-logout:hover {
+    color: #0d0d0d;
+    background: #2ff29e;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
 .active-link {
     background: #2ff29e;
     color: #0d0d0d;
@@ -158,11 +165,14 @@ ul.CTAs a {
     height: 0;
 }
 
-#shopliftingBG, #robberyBG, #totalincidentsBG {
+#shopliftingBG,
+#robberyBG,
+#totalincidentsBG {
     background-color: #cbcecb;
 }
 
-#detectionpermonthBG,   #registeredaccBG {
+#detectionpermonthBG,
+#registeredaccBG {
     background-color: #f2ebeb;
 }
 
@@ -176,7 +186,11 @@ ul.CTAs a {
     color: #fff;
 } */
 
-#detectionpermonthheader, #totalincidentsheader, #robberyheader, #shopliftingheader, #registeredaccheader  {
+#detectionpermonthheader,
+#totalincidentsheader,
+#robberyheader,
+#shopliftingheader,
+#registeredaccheader {
     background-color: #181818;
     color: #2ff29e;
 }
@@ -184,6 +198,7 @@ ul.CTAs a {
 #history-tr {
     background-color: #181818;
 }
+
 #history-tr th {
     color: #2ff29e;
 }

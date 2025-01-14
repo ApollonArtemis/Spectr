@@ -71,13 +71,13 @@
                     <li class="event-link w-100 mt-2" data-content="content4">
                         <a href="#content4" class="nav-link align-middle">
                             <i class="fs-4 bi-clock-history"></i>
-                            <span class="ms-1 d-sm-inline">Reports</span>
+                            <span class="ms-1 d-sm-inline">History</span>
                         </a>
                     </li>
                 </ul>
             </ul>
 
-            <!--Sign out btn-->
+            <!--Profile/Sign out btn-->
             <div class="dropdown pb-4 mx-3">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle px-3"
                     id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -85,9 +85,19 @@
                     <span class="d-none d-sm-inline mx-3" id="user_firstname">User</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow rounded-4 p-0">
-                    <li id="profile-menu"><a class="event-link dropdown-item" data-content="profile" href="#content5"
-                            id="profile-link">Accounts</a></li>
-                    <li><a class="dropdown-item" href="#" id="signoutbutton">Sign out</a></li>
+                    <li id="profile-menu">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <i class="bi bi-person-fill-gear ms-3"></i>
+                            <a class="dropdown-item" onclick="goToContent5(event)" data-content="accounts"
+                                href="#content5" id="profile-link">Accounts</a>
+                        </div>
+                    </li>
+                    <li id="profile-logout">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <i class="bi bi-box-arrow-right ms-3"></i>
+                            <a class="dropdown-item" href="#" id="signoutbutton">Sign out</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -178,37 +188,31 @@
             </div>
 
             <!--CONTENT 2: DETECTION-->
-            <div id="content2" class="content-item" style="display: none;" data-title="Detection">
+            <div id="content2" class="content-item" data-title="Detection">
                 <div class="inner-content mt-3 p-0 d-flex flex-column mx-auto">
-                    <div class="container">
-                        <div class="alert alert-danger mt-5" role="alert">
-                            Shoplift detected at camera 1.
-                        </div>
-                    </div>
                     <div class="container">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" data-bs-toggle="tab" href="#cam1">Cam
+                                <a class="nav-link active" aria-current="page" data-bs-toggle="tab" href="#cam1">Camera
                                     1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#cam2">Cam 2</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#cam2">Camera 2</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#cam3">Cam 3</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#cam3">Camera 3</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#cam4" tabindex="-1">Cam 4</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#cam4" tabindex="-1">Camera 4</a>
                             </li>
                         </ul>
 
                         <div class="tab-content">
                             <div class="tab-pane show active" id="cam1">
-                                <div class="container d-flex flex-column flex-md-row flex-sm-row" style="height: 80vh;">
-                                    <div class="col video-container block p-0 m-0">
-                                        <img id="webcam1"
-                                            src="/video_feed?rtsp_url=rtsp://admin:Hikvision@192.168.1.144:554/Streaming/Channels/102"
-                                            alt="Webcam 1" class="img-fluid camera-frame mt-2" />
+                                <div class="container d-flex flex-column flex-md-row flex-sm-row">
+                                    <div class="col webcam-container block p-1 m-0" data-index="0">
+                                        <img id="webcam1" src="../static/images/nosignal.jpg" alt="Webcam 1"
+                                            class="img-fluid camera-frame" />
                                     </div>
                                     <div class="col my-2 mx-2">
                                         <div id="logContainer" class="p-3 border border-1 m-auto">
@@ -220,7 +224,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table class="table table-bordered table-striped" style="width:100%">
+                                    <table id="cameralogs1" class="table text-center table-hover table-responsive">
                                         <thead>
                                             <tr class="text-center">
                                                 <th class="text-center">Date</th>
@@ -235,36 +239,93 @@
                             </div>
 
                             <div class="tab-pane" id="cam2">
-                                <div class="container d-flex flex-column flex-md-row flex-sm-row" style="height: 80vh;">
-                                    <div class="col video-container block p-0 m-0">
-                                        <img id="webcam1"
-                                            src="/video_feed?rtsp_url=rtsp://admin:Hikvision@192.168.1.144:554/Streaming/Channels/"
-                                            alt="Webcam 1" class="img-fluid camera-frame mt-2" />
+                                <div class="container d-flex flex-column flex-md-row flex-sm-row">
+                                    <div class="col webcam-container block p-0 m-0" data-index="1">
+                                        <img id="webcam2" src="../static/images/nosignal.jpg" alt="Webcam 2"
+                                            class="img-fluid camera-frame" />
                                     </div>
                                     <div class="col my-2 mx-2">
                                         <div id="logContainer" class="p-3 border border-1 m-auto">
 
                                         </div>
-                                        <script>
-                                            fetchLogs();
-                                        </script>
+                                        <!-- <script>
+                                                fetchLogs();
+                                            </script> -->
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <table id="cameralogs2" class="table text-center table-hover table-responsive">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th class="text-center">Date</th>
+                                                <th class="text-center">Time</th>
+                                                <th class="text-center">Camera</th>
+                                                <th class="text-center">Detection</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody_cam2"></tbody>
+                                    </table>
                                 </div>
                             </div>
 
                             <div class="tab-pane" id="cam3">
-                                <div class="col video-container block p-0 m-0">
-                                    <img id="webcam2" src="http://127.0.0.1:5001/video_feed" alt="Webcam 2"
-                                        class="img-fluid camera-frame" />
+                                <div class="container d-flex flex-column flex-md-row flex-sm-row">
+                                    <div class="col webcam-container block p-0 m-0" data-index="2">
+                                        <img id="webcam2" src="../static/images/nosignal.jpg" alt="Webcam 3"
+                                            class="img-fluid camera-frame" />
+                                    </div>
+                                    <div class="col my-2 mx-2">
+                                        <div id="logContainer" class="p-3 border border-1 m-auto">
+
+                                        </div>
+                                        <!-- <script>
+                                                fetchLogs();
+                                            </script> -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <table id="cameralogs3" class="table text-center table-hover table-responsive">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th class="text-center">Date</th>
+                                                <th class="text-center">Time</th>
+                                                <th class="text-center">Camera</th>
+                                                <th class="text-center">Detection</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody_cam3"></tbody>
+                                    </table>
                                 </div>
                             </div>
 
                             <div class="tab-pane" id="cam4">
-                                <div class="col video-container block p-0 m-0">
-                                    <img id="webcam2" src="http://127.0.0.1:5001/video_feed" alt="Webcam 2"
-                                        class="img-fluid camera-frame" />
-                                </div>
+                                <div class="container d-flex flex-column flex-md-row flex-sm-row">
+                                    <div class="col webcam-container block p-0 m-0" data-index="3">
+                                        <img id="webcam2" src="../static/images/nosignal.jpg" alt="Webcam 4"
+                                            class="img-fluid camera-frame" />
+                                    </div>
+                                    <div class="col my-2 mx-2">
+                                        <div id="logContainer" class="p-3 border border-1 m-auto">
 
+                                        </div>
+                                        <!-- <script>
+                                                fetchLogs();
+                                            </script> -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <table id="cameralogs4" class="table text-center table-hover table-responsive">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th class="text-center">Date</th>
+                                                <th class="text-center">Time</th>
+                                                <th class="text-center">Camera</th>
+                                                <th class="text-center">Detection</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody_cam4"></tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -351,7 +412,7 @@
             </div>
 
             <!--CONTENT 5: PROFILE-->
-            <div class="content-item" id="profile" style="display: none;" data-title="Profile">
+            <div class="content-item" id="accounts" style="display: none;" data-title="Profile">
                 <div class="inner-content px-1 px-sm-5">
                     <div class="row align-items-center">
                         <div class="d-flex justify-content-between w-100 mt-3">
@@ -470,13 +531,13 @@
             </div>
 
             <!--CONTENT 6 : ADD STAFF-->
-            <div class="content-item" id="content6" style="display: none;" data-title="Add Staff">
+            <div class="content-item" id="add_staff" style="display: none;" data-title="Add Staff">
                 <div class="inner-content">
                     <div class="row align-items-center">
                         <div class="mt-3">
                             <h2 class="fw-bolder">Staff Management</h2>
                             <p class="fw-lighter"><a href="client.html#content3" class="text-decoration-none text-dark"
-                                    onclick="goToContent3(event)">Manage Staff Details</a> > Add Staff</p>
+                                    onclick="goToStaffManagement(event)">Manage Staff Details</a> > Add Staff</p>
                         </div>
                     </div>
 
@@ -658,7 +719,7 @@
             </div>
 
             <!--CONTENT 7: EDIT STAFF-->
-            <div class="content-item" id="content7" style="display: none;" data-title="Edit Staff">
+            <div class="content-item" id="edit_staff" style="display: none;" data-title="Edit Staff">
                 <div class="inner-content">
                     <div class="row align-items-center">
                         <div class="mt-3">
@@ -985,7 +1046,7 @@
     </div>
 
     <!-- Modal for 4 Digit Verification -->
-    <div class="modal fade" id="pinModal" tabindex="-1" aria-labelledby="pinModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="pinModal" tabindex="-1" aria-labelledby="pinModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1014,7 +1075,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Staff Successfully Registered! -->
     <div class="modal fade" id="staffSuccessModal" tabindex="-1" aria-labelledby="staffSuccessModalLabel"
@@ -1059,13 +1120,12 @@
     <!-- Scripts -->
     <script type="module" src="js/client.js"></script>
     <script defer src="js/script.js"></script>
-    <script type="module" src="js/client-chart.js"></script>
-    <script type="module" src="js/donut_chart.js"></script>
+    <script type="module" src="js/detectionPerMonth_bar.js"></script>
+    <script type="module" src="js/detectionSummary_pie.js"></script>
 
     <script type="module" src="js/add_staff.js"></script>
     <script defer src="js/dynamic-title.js"></script>
     <script src="js/camera-feed.js"></script>
-    <script src="js/chart.js"></script>
 
     <script src="js/address_handler.js"></script>
     <script src="js/staff_address.js"></script>

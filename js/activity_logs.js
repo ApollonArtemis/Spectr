@@ -23,7 +23,7 @@ let tbody = document.getElementById('tbody_activitylogs');
 
 function ActivityLogs(user, date, time) {
     let trow = document.createElement("tr");
-    
+
 
     let td1 = document.createElement('td');
     td1.style.color = "white";
