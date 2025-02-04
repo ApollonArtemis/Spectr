@@ -44,14 +44,14 @@ function Detection(date, time, camera, type) {
     let buttonContainer = document.createElement('div');
     buttonContainer.classList.add('d-flex', 'justify-content-center', 'gap-2', 'flex-column', 'flex-sm-row');
 
-    let viewBtn = document.createElement('button');
-    viewBtn.type = "button";
-    viewBtn.className = "btn text-sm";
-    viewBtn.style.backgroundColor = "rgb(49, 101, 147)";
-    viewBtn.style.color = "white";
-    viewBtn.innerHTML = "<img src='images/icons/download-button.png' alt='Download'> Download";
+    let downloadBtn = document.createElement('button');
+    downloadBtn.type = "button";
+    downloadBtn.className = "btn text-sm";
+    downloadBtn.style.backgroundColor = "#0b0b14";
+    downloadBtn.style.color = "#2ff29e";
+    downloadBtn.innerHTML = "<img src='images/icons/download-button.png' alt='Download'> Download";
 
-    buttonContainer.appendChild(viewBtn);
+    buttonContainer.appendChild(downloadBtn);
 
     td5.appendChild(buttonContainer);
 

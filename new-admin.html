@@ -53,62 +53,8 @@
         </div>
 
         <div class="row">
-            <div class="col">
-                <div class="row mb-3">
-                    <!--ACTIVE USERS-->
-                    <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
-                        <div class="card rounded-4" id="activeuserBG">
-                            <div id="activeuserheader" class="card-header rounded-top-4">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person-check-fill me-2"></i>
-                                    <p class="fw-bolder text-start fs-5 py-3">Active Users</p>
-                                </div>
-                            </div>
-                            <p id="activeUsersCount" class="py-5 fw-semibold fs-1 text-center mt-3">0</p>
-                        </div>
-                    </div>
-                    <!--INACTIVE USERS-->
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="card rounded-4" id="inactiveuserBG">
-                            <div id="inactiveuserheader" class="card-header rounded-top-4">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person-dash-fill me-2"></i>
-                                    <p class="fw-bolder text-start fs-5 py-3">Inactive Users</p>
-                                </div>
-                            </div>
-                            <p id="inactiveUsersCount" class="py-5 fw-semibold fs-1 text-center mt-3">0</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <!--SUSPENDED USERS-->
-                    <div class="col-lg-6 col-md-12 col-sm-6 mb-3">
-                        <div class="card rounded-4" id="suspendeduserBG">
-                            <div id="suspendeduserheader" class="card-header rounded-top-4">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person-fill-slash me-2"></i>
-                                    <p class="fw-bolder text-start fs-5 py-3">Suspended Users</p>
-                                </div>
-                            </div>
-                            <p id="suspendedUsersCount" class="py-5 fw-semibold fs-1 text-center">0</p>
-                        </div>
-                    </div>
-                    <!--TOTAL EARNINGS-->
-                    <div class="col-lg-6 col-md-12 col-sm-6 mb-3">
-                        <div class="card rounded-4" id="totalearningsBG">
-                            <div id="totalearningsheader" class="card-header rounded-top-4">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-bank me-2"></i>
-                                    <p class="fw-bolder text-start fs-5 py-3">Total Earnings</p>
-                                </div>
-                            </div>
-                            <p id="totalearningsCount" class="py-5 fw-semibold fs-1 text-center">0</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!--ACCOUNT MANAGEMENT-->
-            <div class="col">
+            <div class="col-xxl-8">
                 <div class="card rounded-4" id="activitylogsBG">
                     <div id="activitylogsheader" class="card-header rounded-top-4">
                         <div class="d-flex align-items-center">
@@ -124,7 +70,7 @@
                             </button>
                         </div>
                         <div class="table-responsive p-3 mt-3">
-                            <div class="data_table" style="height: 42.2vh;">
+                            <div class="data_table" style="height: 50.5vh;">
                                 <table id="example" class="table borderless" style="width:100%">
                                     <thead>
                                         <tr id="tr-accmanagement" class="text-center">
@@ -138,6 +84,47 @@
                                     <tbody id="tbody_accountmanagement"></tbody>
                                 </table>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-4">
+                <!--ACTIVE USERS-->
+                <div class="row mb-3">
+                    <div class="col mb-3">
+                        <div class="card rounded-4" id="activeuserBG">
+                            <div id="activeuserheader" class="card-header rounded-top-4">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-person-check-fill me-2"></i>
+                                    <p class="fw-bolder text-start fs-5 py-3">Active Users</p>
+                                </div>
+                            </div>
+                            <p id="activeUsersCount" class="py-5 fw-semibold fs-1 text-center mt-3">0</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card rounded-4" id="inactiveuserBG">
+                            <div id="inactiveuserheader" class="card-header rounded-top-4">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-person-dash-fill me-2"></i>
+                                    <p class="fw-bolder text-start fs-5 py-3">Inactive Users</p>
+                                </div>
+                            </div>
+                            <p id="inactiveUsersCount" class="py-5 fw-semibold fs-1 text-center mt-3">0</p>
+                        </div>
+                    </div>
+                </div>
+                <!--INACTIVE USERS-->
+                <div class="row">
+                    <div class="col">
+                        <div class="card rounded-4" id="donutgraphBG">
+                            <div id="accmanagementheader" class="card-header rounded-top-4">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-people me-2"></i>
+                                    <p class="fw-bolder text-start fs-5 py-3">Registered Accounts</p>
+                                </div>
+                            </div>
+                            <div class="py-3 px-2" id="chart3"></div>
                         </div>
                     </div>
                 </div>
@@ -170,8 +157,7 @@
             </div>
         </div>
 
-        <div class="row gy-3 mt-5">
-            <!--ACTIVITY LOGS-->
+        <!-- <div class="row gy-3 mt-5">
             <div class="col-lg-8 col-md-12">
                 <div class="card rounded-4" id="activitylogsBG">
                     <div id="accmanagementheader" class="card-header rounded-top-4">
@@ -179,7 +165,7 @@
                             <i class="bi bi-activity me-2"></i>
                             <p class="fw-bolder text-start fs-5 py-3">Activity Logs</p>
                         </div>
-                        
+
                     </div>
                     <div class="table-responsive p-3 mt-3">
                         <div class="data_table" style="height: 60.4vh;">
@@ -196,22 +182,13 @@
                             </table>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
-            <!--REGISTERED ACCOUNTS-->
             <div class="col-lg-4 col-md-12">
-                <div class="card rounded-4" id="donutgraphBG">
-                    <div id="accmanagementheader" class="card-header rounded-top-4">
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-people me-2"></i>
-                            <p class="fw-bolder text-start fs-5 py-3">Registered Accounts</p>
-                        </div>
-                    </div>
-                    <div class="py-5 my-4" id="chart3"></div>
-                </div>
+                
             </div>
-        </div>
+        </div> -->
     </div>
 
     <!-- Modal -->
@@ -740,7 +717,9 @@
     </div>
 
     <script src="js/registration-step.js"></script>
-    <script type="module" src="js/admin-detectionpermonth.js"></script>
+    <script type="module" src="js/admin_newUserPerMonth.js"></script>
+    <!-- <script type="module" src="js/admin_detectionPerMonth.js"></script> -->
+     <script type="module" src="js/hardcode.js"></script>
     <script type="module" src="js/apexchart.js"></script>
 
     <!-- jQuery -->

@@ -45,6 +45,7 @@
 #sidebar ul a {
     color: #030303;
     padding: 10px;
+    font-weight: 500;
 }
 
 #sidebar ul li a {
@@ -78,7 +79,6 @@
 .active-link {
     background: #2ff29e;
     color: #0d0d0d;
-    font-weight: bold;
     border-radius: 10px;
 }
 
@@ -165,14 +165,14 @@ ul.CTAs a {
     height: 0;
 }
 
-#shopliftingBG,
+/* #shopliftingBG,
 #robberyBG,
 #totalincidentsBG {
     background-color: #cbcecb;
-}
+} */
 
 #detectionpermonthBG,
-#registeredaccBG {
+#registeredaccBG, #shopliftingBG {
     background-color: #f2ebeb;
 }
 
@@ -196,10 +196,18 @@ ul.CTAs a {
 }
 
 #history-tr {
-    background-color: #181818;
+    background-color: #0b0b14;
 }
 
 #history-tr th {
+    color: #2ff29e;
+}
+
+#detection-logs {
+    background-color: #0b0b14;
+}
+
+#detection-logs th {
     color: #2ff29e;
 }
 

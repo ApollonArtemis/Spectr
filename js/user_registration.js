@@ -388,6 +388,9 @@ const RegisterUser = async (evt) => {
     // Create user in Firebase Auth
     createUserWithEmailAndPassword(auth, email.value, password.value)
         .then((credentials) => {
+            // Get the current date (YYYY-MM-DD)
+            const currentDate = new Date().toISOString().split('T')[0];
+
             // Save user data in Firebase Database
             set(ref(db, 'Registered_Accounts/' + credentials.user.uid), {
                 firstname: firstName.value,
@@ -411,7 +414,8 @@ const RegisterUser = async (evt) => {
                 company_region: companyRegion.value,
                 company_province: companyProvince.value,
                 company_city: companyCity.value,
-                company_barangay: companyBarangay.value
+                company_barangay: companyBarangay.value,
+                date_created: currentDate // Add the date of creation (YYYY-MM-DD)
             });
             let successModal = new bootstrap.Modal(document.getElementById('createUserModal'));
             successModal.show();

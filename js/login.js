@@ -89,7 +89,7 @@ let SignInUser = async (evt) => {
                     company_barangay: snapshot.val().company_barangay
                 }));
                 sessionStorage.setItem("user-creds", JSON.stringify(credentials.user));
-                window.location.href = 'client.html';
+                window.location.href = 'new-client.html';
             }
         });
 

@@ -253,36 +253,36 @@ function changeUrl(content) {
     }
 } */
 
-// CONTENT 5: ACCOUNTS
-function goToContent5(event) {
-    event.preventDefault();
-    document.getElementById('content1').style.display = 'none'; // Dashboard
-    document.getElementById('content3').style.display = 'none'; // Staff Management
-    document.getElementById('accounts').style.display = 'block'; // Accounts
+// // CONTENT 5: ACCOUNTS
+// function goToContent5(event) {
+//     event.preventDefault();
+//     document.getElementById('content1').style.display = 'none'; // Dashboard
+//     document.getElementById('content3').style.display = 'none'; // Staff Management
+//     document.getElementById('accounts').style.display = 'block'; // Accounts
 
-    // Save the active content to localStorage
-    localStorage.setItem("activeContent", "accounts");
-}
+//     // Save the active content to localStorage
+//     localStorage.setItem("activeContent", "accounts");
+// }
 
-// CONTENT 6: ADD STAFF
-function showContent6(event) {
-    event.preventDefault();
+// // CONTENT 6: ADD STAFF
+// function showContent6(event) {
+//     event.preventDefault();
 
-    document.getElementById('content3').style.display = 'none'; // Staff Management
-    document.getElementById('content6').style.display = 'block'; // Add Staff
+//     document.getElementById('content3').style.display = 'none'; // Staff Management
+//     document.getElementById('content6').style.display = 'block'; // Add Staff
 
-    // Save the active content to localStorage
-    localStorage.setItem("activeContent", "content6");
-}
+//     // Save the active content to localStorage
+//     localStorage.setItem("activeContent", "content6");
+// }
 
-// CONTENT 7: EDIT STAFF
-function goToStaffManagement(event) {
-    event.preventDefault();
+// // CONTENT 7: EDIT STAFF
+// function goToStaffManagement(event) {
+//     event.preventDefault();
 
-    document.getElementById('content3').style.display = 'block'; // Staff Management
-    document.getElementById('content6').style.display = 'none'; // Add Staff
-    document.getElementById('content7').style.display = 'none'; // Edit Staff
+//     document.getElementById('content3').style.display = 'block'; // Staff Management
+//     document.getElementById('content6').style.display = 'none'; // Add Staff
+//     document.getElementById('content7').style.display = 'none'; // Edit Staff
 
-    // Save the active content to localStorage
-    localStorage.setItem("activeContent", "content3");
-}
+//     // Save the active content to localStorage
+//     localStorage.setItem("activeContent", "content3");
+// }
